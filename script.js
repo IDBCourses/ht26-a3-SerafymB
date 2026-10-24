@@ -65,7 +65,7 @@ function setup() {
 
   // Example: a shape near the middle of the window. Replace it with your own.
   const example = createShape("example");
-  example.setPosition(0.5, 0.5);
+  example.setPosition(0.4, 0.3);
 
   // Put your event listener code here
   window.addEventListener("pointerdown", pointerDown);

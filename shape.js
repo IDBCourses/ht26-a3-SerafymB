@@ -24,8 +24,8 @@ export class Shape {
   /** @param {HTMLElement} element - The element this shape controls. */
   constructor(element) {
     this.element = element;
-    this.x = (window.innerWidth || 0) * 0.5;
-    this.y = (window.innerHeight || 0) * 0.5;
+    this.x = (window.innerWidth || 0) * 0.3;
+    this.y = (window.innerHeight || 0) * 0.3;
     this.hue = 0;
     this.saturation = 100;
     this.lightness = 50;
