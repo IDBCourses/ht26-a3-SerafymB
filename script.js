@@ -57,7 +57,7 @@ function update() {
 
 console.log(randomColor1, randomColor2, randomColor3);
 
-function pointerEnter(event) {
+function pointerClick(event) {
   synth.triggerAttackRelease(randomNote[counter], duration[counter]);
   shape.setColour(randomColor1, randomColor2, randomColor3);
   randomColor1 = Math.floor(Math.random () * 400) + 1;
@@ -97,12 +97,19 @@ function use() {
 
 // ---------- Controls (Event Handlers) ----------
 // Runs every time the pointer goes down: a click, a tap or a pen touch.
-function pointerDown(event) {
-  Tone.start(); // browsers only allow sound after the player has pressed something
-
-  console.log("Pointer down at", event.clientX, event.clientY);
-  synth.triggerAttackRelease("G2", "16n"); // play the note for an eighth note
+function pointerEnter(event) { // browsers only allow sound after the player has pressed something
+  synth.triggerAttack("G2"); // play the note for an eighth note
+  example.setColour(100, 40, 40);
 }
+
+function pointerLeave(event) {
+  synth.triggerRelease("G2")
+  example.setColour(200, 80, 50);
+}
+
+//function positions(event) {
+//console.log("Pointer down at", event.clientX, event.clientY);
+//}
 
 // ---------- Setup ----------
 // Setup is run once, at the start of the program. It sets everything up for us!
@@ -114,8 +121,9 @@ function setup() {
   const example = createShape("example");
   example.setPosition(0.4, 0.5);
 
-  shape.element.addEventListener("pointerup", pointerEnter);
-  example.element.addEventListener("pointerup", pointerDown);
+  shape.element.addEventListener("pointerup", pointerClick);
+  example.element.addEventListener("pointerenter", pointerEnter);
+  example.element.addEventListener("pointerleave", pointerLeave);
 }
 
 setup(); // Always remember to call setup()!
