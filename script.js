@@ -31,6 +31,11 @@ const note = "C4"; // the note played when the pointer goes down
 // ---------- State ----------
 // State variables are the parts of your program that change over time.
 // For example: where the pointer is, how fast it's moving, or whether a drone is on.
+const shape = createShape()
+shape.setSize(250);
+shape.setRoundedness(0.2)
+shape.setColour(245, 400, 20)
+shape.setPosition(0.7, 0.3)
 
 // ---------- Sound ----------
 // Make the instruments and plug them into the speakers.
@@ -41,6 +46,36 @@ const synth = new Tone.PolySynth(Tone.Synth).toDestination(); // can play severa
 function update() {
   setTimeout(update, 100); // call update() again in 100 milliseconds
 }
+
+let randomColor1 = Math.floor(Math.random () * 400) + 1;
+let randomColor2 = Math.floor(Math.random () * 250) + 1;
+let randomColor3 = Math.floor(Math.random () * 70) + 1;
+const randomNote = ["D1", "E4", "E3", "D4", "A3", "A4", "B3", "F2", "G4"]
+const duration   = ["8n", "8n", "8n", "20n", "16n", "10n", "8n", "12n", "8n"]
+let counter = Math.floor(Math.random () * 8) + 1;
+
+console.log(randomColor1, randomColor2, randomColor3);
+
+function pointerEnter(event) {
+  synth.triggerAttackRelease(randomNote[counter], duration[counter]);
+  shape.setColour(randomColor1, randomColor2, randomColor3);
+  randomColor1 = Math.floor(Math.random () * 400) + 1;
+  randomColor2 = Math.floor(Math.random () * 200) + 1;
+  randomColor3 = Math.floor(Math.random () * 70) + 1;
+  console.log("The settings for the color for the circle are ", randomColor1, randomColor2, randomColor3);
+  counter = Math.floor(Math.random () * 8) + 1;
+  console.log(randomNote[counter], duration[counter]);
+}
+
+//function pointerEnter(event) {
+//  synth.triggerAttack("A3");
+//  shape.setColour(200, 10, 40)
+//}
+
+//function pointerRelease(event) {
+//  synth.triggerRelease("");
+//  shape.setColour(200, 10, 40)
+//}
 
 // ---------- Use ----------
 // Use the state to make sound and move shapes. This is called every 100ms.
@@ -54,7 +89,7 @@ function pointerDown(event) {
   Tone.start(); // browsers only allow sound after the player has pressed something
 
   console.log("Pointer down at", event.clientX, event.clientY);
-  synth.triggerAttackRelease(note, "8n"); // play the note for an eighth note
+  //synth.triggerAttackRelease(note, "8n"); // play the note for an eighth note
 }
 
 // ---------- Setup ----------
@@ -65,10 +100,12 @@ function setup() {
 
   // Example: a shape near the middle of the window. Replace it with your own.
   const example = createShape("example");
-  example.setPosition(0.4, 0.3);
+  example.setPosition(0.35, 0.5);
 
   // Put your event listener code here
   window.addEventListener("pointerdown", pointerDown);
+
+  shape.element.addEventListener("pointerup", pointerEnter); // 4c: stop when the pointer leaves, too
 }
 
 setup(); // Always remember to call setup()!
