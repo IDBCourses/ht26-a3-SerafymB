@@ -34,20 +34,176 @@ const note = "C4"; // the note played when the pointer goes down
 let randomColor1 = Math.floor(Math.random () * 400) + 1;
 let randomColor2 = Math.floor(Math.random () * 250) + 1;
 let randomColor3 = Math.floor(Math.random () * 70) + 1;
+
 const randomNote = ["D1", "E4", "E3", "D4", "A3", "A4", "B3", "F2", "G4"]
 const duration   = ["8n", "8n", "8n", "20n", "16n", "10n", "8n", "12n", "8n"]
 let counter = Math.floor(Math.random () * 8) + 1;
-let position1Shape = 0.1;
-let position2Shape = 0.1;
+
+let position1Shape = 0.7;
+let position2Shape = 0.3;
 
 const shape = createShape()
-shape.setSize(250);
+shape.setSize(50);
 shape.setRoundedness(0.2)
 shape.setColour(245, 400, 20)
+shape.setRotation(250)
 
+// PUMCIN
+
+const pumpaBackgroud = createShape();
+pumpaBackgroud.setSize(630);
+pumpaBackgroud.setRoundedness(0.5);
+pumpaBackgroud.setColour(34, 250, 70);
+pumpaBackgroud.setPosition(0.31, 0.075)
+
+const pumpa = createShape();
+pumpa.setSize(600);
+pumpa.setRoundedness(0.5);
+pumpa.setColour(34, 250, 50);
+pumpa.setPosition(0.33, 0.1)
+
+// EYES
+
+const partOfAnEye = createShape()
+partOfAnEye.setSize(60);
+partOfAnEye.setRoundedness(0);
+partOfAnEye.setColour(140, 90, 0);
+partOfAnEye.setPosition(0.44, 0.3)
+
+const partOfAnEye2 = createShape()
+partOfAnEye2.setSize(60);
+partOfAnEye2.setRoundedness(0);
+partOfAnEye2.setColour(140, 90, 0);
+partOfAnEye2.setPosition(0.63, 0.3)
+
+const InnerEye = createShape()
+InnerEye.setSize(20);
+InnerEye.setRoundedness(0.1);
+InnerEye.setColour(140, 90, 50);
+InnerEye.setPosition(0.46, 0.36)
+
+const InnerEye2 = createShape()
+InnerEye2.setSize(20);
+InnerEye2.setRoundedness(0.1);
+InnerEye2.setColour(140, 90, 50);
+InnerEye2.setPosition(0.65, 0.36)
+
+// NOSE
+
+const nosePart1 = createShape()
+nosePart1.setSize(44);
+nosePart1.setRoundedness(0.1);
+nosePart1.setColour(210, 40, 0);
+nosePart1.setPosition(0.53, 0.48)
+nosePart1.setRotation(137)
+
+const nosePart2 = createShape()
+nosePart2.setSize(44);
+nosePart2.setRoundedness(0.1);
+nosePart2.setColour(140, 90, 0);
+nosePart2.setPosition(0.56, 0.48)
+nosePart2.setRotation(300)
+
+const nosePart3 = createShape()
+nosePart3.setSize(54);
+nosePart3.setRoundedness(0.1);
+nosePart3.setColour(140, 90, 0);
+nosePart3.setPosition(0.54, 0.42)
+nosePart3.setRotation(90)
+
+// MOUTH
+
+//RIGHT
+const mouthPart1 = createShape()
+mouthPart1.setSize(35);
+mouthPart1.setRoundedness(0.1);
+mouthPart1.setColour(140, 90, 0);
+mouthPart1.setPosition(0.56, 0.67)
+mouthPart1.setRotation(0)
+
+const mouthPart2 = createShape()
+mouthPart2.setSize(35);
+mouthPart2.setRoundedness(0.1);
+mouthPart2.setColour(140, 90, 0);
+mouthPart2.setPosition(0.60, 0.63)
+mouthPart2.setRotation(0)
+
+const mouthPart3 = createShape()
+mouthPart3.setSize(35);
+mouthPart3.setRoundedness(0.1);
+mouthPart3.setColour(140, 90, 0);
+mouthPart3.setPosition(0.64, 0.67)
+mouthPart3.setRotation(0)
+
+const mouthPart4 = createShape()
+mouthPart4.setSize(35);
+mouthPart4.setRoundedness(0.1);
+mouthPart4.setColour(140, 90, 0);
+mouthPart4.setPosition(0.67, 0.63)
+mouthPart4.setRotation(0)
+
+const mouthPart5 = createShape()
+mouthPart5.setSize(35);
+mouthPart5.setRoundedness(0.1);
+mouthPart5.setColour(140, 90, 0);
+mouthPart5.setPosition(0.69, 0.57)
+mouthPart5.setRotation(0)
+
+const mouthPart6 = createShape()
+mouthPart6.setSize(35);
+mouthPart6.setRoundedness(0.1);
+mouthPart6.setColour(140, 90, 0);
+mouthPart6.setPosition(0.71, 0.51)
+mouthPart6.setRotation(0)
+
+// LEFT
+
+const mouthPart7 = createShape()
+mouthPart7.setSize(35);
+mouthPart7.setRoundedness(0.1);
+mouthPart7.setColour(140, 90, 0);
+mouthPart7.setPosition(0.54, 0.67)
+mouthPart7.setRotation(0)
+
+const mouthPart8 = createShape()
+mouthPart8.setSize(35);
+mouthPart8.setRoundedness(0.1);
+mouthPart8.setColour(140, 90, 0);
+mouthPart8.setPosition(0.5, 0.63)
+mouthPart8.setRotation(0)
+
+const mouthPart9 = createShape()
+mouthPart9.setSize(35);
+mouthPart9.setRoundedness(0.1);
+mouthPart9.setColour(140, 90, 0);
+mouthPart9.setPosition(0.46, 0.67)
+mouthPart9.setRotation(0)
+
+const mouthPart11 = createShape()
+mouthPart11.setSize(35);
+mouthPart11.setRoundedness(0.1);
+mouthPart11.setColour(140, 90, 0);
+mouthPart11.setPosition(0.42, 0.63)
+mouthPart11.setRotation(0)
+
+const mouthPart12 = createShape()
+mouthPart12.setSize(35);
+mouthPart12.setRoundedness(0.1);
+mouthPart12.setColour(140, 90, 0);
+mouthPart12.setPosition(0.4, 0.57)
+mouthPart12.setRotation(0)
+
+const mouthPart13 = createShape()
+mouthPart13.setSize(35);
+mouthPart13.setRoundedness(0.1);
+mouthPart13.setColour(140, 90, 0);
+mouthPart13.setPosition(0.38, 0.51)
+mouthPart13.setRotation(0)
 // ---------- Sound ----------
 // Make the instruments and plug them into the speakers.
-const synth = new Tone.PolySynth(Tone.Synth).toDestination(); // can play several notes at once
+const synth = new Tone.PolySynth(Tone.Syth).toDestination(); // can play several notes at once
+const mono = new Tone.MonoSynth().toDestination();
+
 
 // ---------- Update ----------
 // Update the state. This is called every 100ms.
@@ -58,37 +214,143 @@ function update() {
 console.log(randomColor1, randomColor2, randomColor3);
 
 function pointerClick(event) {
+
+  counter = Math.floor(Math.random () * 8) + 1;
+  console.log(randomNote[counter], duration[counter]);
   synth.triggerAttackRelease(randomNote[counter], duration[counter]);
+
   shape.setColour(randomColor1, randomColor2, randomColor3);
   randomColor1 = Math.floor(Math.random () * 400) + 1;
   randomColor2 = Math.floor(Math.random () * 200) + 1;
   randomColor3 = Math.floor(Math.random () * 70) + 1;
+
+  //shape.setPosition(position1Shape, position2Shape)
+  //position1Shape = position1Shape + 0.1;
+  //position2Shape = position2Shape + 0.1;
+  //console.log("The settings for the color for the circle are ", randomColor1, randomColor2, randomColor3);
+
+  //if (position1Shape > 0.9) {
+  //  position1Shape = 0.2
+  //  console.log("The positions on x and y for the shape are: ", position1Shape, position2Shape)
+  //} else if (position2Shape > 0.9) {
+  //  position2Shape = 0.3
+  //  console.log("The positions on x and y for the shape are: ", position1Shape, position2Shape)
+  //}
+  }
+
+  function playy(event) {
+    synth.triggerAttackRelease("E3", "20n", Tone.now());
+    synth.triggerAttackRelease("B4", "20n", Tone.now() + 0.3);
+    synth.triggerAttackRelease("E3", "20n", Tone.now() + 0.6);
+    synth.triggerAttackRelease("B4", "20n", Tone.now() + 0.9);
+
+    synth.triggerAttackRelease("E2", "20n", Tone.now() + 1.2);
+    synth.triggerAttackRelease("E3", "20n", Tone.now() + 1.5);
+    synth.triggerAttackRelease("C4", "20n", Tone.now() + 1.8);
+
+    synth.triggerAttackRelease("C5", "20n", Tone.now() + 2.1);
+    synth.triggerAttackRelease("B4", "20n", Tone.now() + 2.4);
+    synth.triggerAttackRelease("E2", "20n", Tone.now() + 2.7);
+    synth.triggerAttackRelease("E3", "20n", Tone.now() + 3.0);
+    synth.triggerAttackRelease("A4", "20n", Tone.now() + 3.3);
+
+    synth.triggerAttackRelease("B2", "20n", Tone.now() + 3.6);
+    synth.triggerAttackRelease("G3", "20n", Tone.now() + 3.9);
+    synth.triggerAttackRelease("G2", "20n", Tone.now() + 4.2);
+    synth.triggerAttackRelease("E2", "20n", Tone.now() + 4.5);
+    synth.triggerAttackRelease("E3", "20n", Tone.now() + 4.8);
+    synth.triggerAttackRelease("E4", "20n", Tone.now() + 5.1);
+    synth.triggerAttackRelease("F4", "20n", Tone.now() + 5.4);
+
   shape.setPosition(position1Shape, position2Shape)
   position1Shape = position1Shape + 0.1;
   position2Shape = position2Shape + 0.1;
   console.log("The settings for the color for the circle are ", randomColor1, randomColor2, randomColor3);
-  counter = Math.floor(Math.random () * 8) + 1;
-  console.log(randomNote[counter], duration[counter]);
+
 if (position1Shape > 0.9) {
-    position1Shape = 0.1
+    position1Shape = 0.2
     console.log("The positions on x and y for the shape are: ", position1Shape, position2Shape)
   } else if (position2Shape > 0.9) {
-    position2Shape = 0.1
+    position2Shape = 0.3
     console.log("The positions on x and y for the shape are: ", position1Shape, position2Shape)
   }
-
 }
 
-//function pointerEnter(event) {
-//  synth.triggerAttack("A3");
-//  shape.setColour(200, 10, 40)
-//}
+function play1(event) {
+  synth.triggerAttackRelease("E3", "20n", Tone.now());
+}
 
-//function pointerRelease(event) {
-//  synth.triggerRelease("");
-//  shape.setColour(200, 10, 40)
-//}
+function play2(event) {
+  synth.triggerAttackRelease("B4", "20n", Tone.now());
+}
 
+function play3(event) {
+  synth.triggerAttackRelease("E3", "20n", Tone.now());
+}
+
+function play4(event) {
+  synth.triggerAttackRelease("B4", "20n", Tone.now());
+}
+
+function play5(event) {
+  synth.triggerAttackRelease("E2", "20n", Tone.now());
+}
+
+function play6(event) {
+  synth.triggerAttackRelease("E3", "20n", Tone.now());
+}
+
+function play7(event) {
+  synth.triggerAttackRelease("C4", "20n", Tone.now());
+}
+
+function play8(event) {
+  synth.triggerAttackRelease("C5", "20n", Tone.now());
+}
+
+function play9(event) {
+  synth.triggerAttackRelease("B4", "20n", Tone.now());
+}
+
+function play10(event) {
+  synth.triggerAttackRelease("E2", "20n", Tone.now());
+}
+
+function play11(event) {
+  synth.triggerAttackRelease("E3", "20n", Tone.now());
+}
+
+function play12(event) {
+  synth.triggerAttackRelease("A4", "20n", Tone.now());
+}
+
+function play13(event) {
+  synth.triggerAttackRelease("B2", "20n", Tone.now());
+}
+
+function randomNoteMono(event) {
+  counter = Math.floor(Math.random () * 8) + 1;
+  console.log(randomNote[counter], duration[counter]);
+  mono.triggerAttackRelease(randomNote[counter], duration[counter]);
+}
+
+function randomNoteSynth(event) {
+  counter = Math.floor(Math.random () * 8) + 1;
+  console.log(randomNote[counter], duration[counter]);
+  synth.triggerAttackRelease(randomNote[counter], duration[counter]);
+}
+
+function playANoteNose(event) {
+   synth.triggerAttackRelease("E4", "8n");
+}
+
+function playANoteNose2(event) {
+   synth.triggerAttackRelease("E3", "8n");
+}
+
+function playANoteNose3(event) {
+   synth.triggerAttackRelease("E2", "8n");
+}
 // ---------- Use ----------
 // Use the state to make sound and move shapes. This is called every 100ms.
 function use() {
@@ -98,13 +360,13 @@ function use() {
 // ---------- Controls (Event Handlers) ----------
 // Runs every time the pointer goes down: a click, a tap or a pen touch.
 function pointerEnter(event) { // browsers only allow sound after the player has pressed something
-  synth.triggerAttack("G2"); // play the note for an eighth note
-  example.setColour(100, 40, 40);
+  //synth.triggerAttack("B3"); // play the note for an eighth note
+  mono.triggerAttack("B3");
 }
 
 function pointerLeave(event) {
-  synth.triggerRelease("G2")
-  example.setColour(200, 80, 50);
+  //synth.triggerRelease("B3")
+  mono.triggerRelease();
 }
 
 //function positions(event) {
@@ -119,11 +381,36 @@ function setup() {
 
   // Example: a shape near the middle of the window. Replace it with your own.
   const example = createShape("example");
-  example.setPosition(0.4, 0.5);
+  example.setPosition(0.1, 0.7);
 
-  shape.element.addEventListener("pointerup", pointerClick);
+  shape.element.addEventListener("pointerdown", playy);
   example.element.addEventListener("pointerenter", pointerEnter);
   example.element.addEventListener("pointerleave", pointerLeave);
+  nosePart1.element.addEventListener("pointerenter", playANoteNose2);
+  nosePart2.element.addEventListener("pointerenter", playANoteNose3);
+  nosePart3.element.addEventListener("pointerenter", playANoteNose);
+  //pumpaBackgroud.element.addEventListener("pointerenter", randomNoteMono);
+
+  window.addEventListener("keydown", playy);
+
+  partOfAnEye.element.addEventListener("pointerenter", play1)
+  InnerEye.element.addEventListener("pointerenter", play2)
+
+  partOfAnEye2.element.addEventListener("pointerenter", play11)
+  InnerEye2.element.addEventListener("pointerenter", play13)
+
+  mouthPart13.element.addEventListener("pointerenter", play1)
+  mouthPart12.element.addEventListener("pointerenter", play2)
+  mouthPart11.element.addEventListener("pointerenter", play3)
+  mouthPart9.element.addEventListener("pointerenter", play4)
+  mouthPart8.element.addEventListener("pointerenter", play5)
+  mouthPart7.element.addEventListener("pointerenter", play6)
+  mouthPart1.element.addEventListener("pointerenter", play7)
+  mouthPart2.element.addEventListener("pointerenter", play8)
+  mouthPart3.element.addEventListener("pointerenter", play9)
+  mouthPart4.element.addEventListener("pointerenter", play10)
+  mouthPart5.element.addEventListener("pointerenter", play11)
+  mouthPart6.element.addEventListener("pointerenter", play12)
 }
 
 setup(); // Always remember to call setup()!
