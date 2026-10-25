@@ -35,18 +35,28 @@ let randomColor1 = Math.floor(Math.random () * 400) + 1;
 let randomColor2 = Math.floor(Math.random () * 250) + 1;
 let randomColor3 = Math.floor(Math.random () * 70) + 1;
 
-const randomNote = ["D1", "E4", "E3", "D4", "A3", "A4", "B3", "F2", "G4"]
-const duration   = ["8n", "8n", "8n", "20n", "16n", "10n", "8n", "12n", "8n"]
+const randomNote = ["D1", "E4", "E3", "D4", "A3", "A4", "B3", "F2", "G4"];
+const duration   = ["8n", "8n", "8n", "20n", "16n", "10n", "8n", "12n", "8n"];
+let timeNow = [];
+let enteredCircle = [];
+let leftCircle = [];
+let counter2 = 0;
+let octave1 = 4;
 let counter = Math.floor(Math.random () * 8) + 1;
 
 let position1Shape = 0.7;
 let position2Shape = 0.3;
 
+function Time(event) {
+  timeNow.push(Date.now());
+  console.log(timeNow);
+}
+
 const shape = createShape()
 shape.setSize(50);
-shape.setRoundedness(0.2)
-shape.setColour(245, 400, 20)
-shape.setRotation(250)
+shape.setRoundedness(0.2);
+shape.setColour(245, 400, 20);
+shape.setRotation(250);
 
 // PUMCIN
 
@@ -54,13 +64,13 @@ const pumpaBackgroud = createShape();
 pumpaBackgroud.setSize(630);
 pumpaBackgroud.setRoundedness(0.5);
 pumpaBackgroud.setColour(34, 250, 70);
-pumpaBackgroud.setPosition(0.31, 0.075)
+pumpaBackgroud.setPosition(0.31, 0.075);
 
 const pumpa = createShape();
 pumpa.setSize(600);
 pumpa.setRoundedness(0.5);
 pumpa.setColour(34, 250, 50);
-pumpa.setPosition(0.33, 0.1)
+pumpa.setPosition(0.33, 0.1);
 
 // EYES
 
@@ -68,25 +78,25 @@ const partOfAnEye = createShape()
 partOfAnEye.setSize(60);
 partOfAnEye.setRoundedness(0);
 partOfAnEye.setColour(140, 90, 0);
-partOfAnEye.setPosition(0.44, 0.3)
+partOfAnEye.setPosition(0.44, 0.3);
 
 const partOfAnEye2 = createShape()
 partOfAnEye2.setSize(60);
 partOfAnEye2.setRoundedness(0);
 partOfAnEye2.setColour(140, 90, 0);
-partOfAnEye2.setPosition(0.63, 0.3)
+partOfAnEye2.setPosition(0.63, 0.3);
 
 const InnerEye = createShape()
 InnerEye.setSize(20);
 InnerEye.setRoundedness(0.1);
 InnerEye.setColour(140, 90, 50);
-InnerEye.setPosition(0.46, 0.36)
+InnerEye.setPosition(0.46, 0.36);
 
 const InnerEye2 = createShape()
 InnerEye2.setSize(20);
 InnerEye2.setRoundedness(0.1);
 InnerEye2.setColour(140, 90, 50);
-InnerEye2.setPosition(0.65, 0.36)
+InnerEye2.setPosition(0.65, 0.36);
 
 // NOSE
 
@@ -94,22 +104,22 @@ const nosePart1 = createShape()
 nosePart1.setSize(44);
 nosePart1.setRoundedness(0.1);
 nosePart1.setColour(210, 40, 0);
-nosePart1.setPosition(0.53, 0.48)
-nosePart1.setRotation(137)
+nosePart1.setPosition(0.53, 0.48);
+nosePart1.setRotation(137);
 
 const nosePart2 = createShape()
 nosePart2.setSize(44);
 nosePart2.setRoundedness(0.1);
 nosePart2.setColour(140, 90, 0);
-nosePart2.setPosition(0.56, 0.48)
-nosePart2.setRotation(300)
+nosePart2.setPosition(0.56, 0.48);
+nosePart2.setRotation(300);
 
 const nosePart3 = createShape()
 nosePart3.setSize(54);
 nosePart3.setRoundedness(0.1);
 nosePart3.setColour(140, 90, 0);
-nosePart3.setPosition(0.54, 0.42)
-nosePart3.setRotation(90)
+nosePart3.setPosition(0.54, 0.42);
+nosePart3.setRotation(90);
 
 // MOUTH
 
@@ -118,87 +128,86 @@ const mouthPart1 = createShape()
 mouthPart1.setSize(35);
 mouthPart1.setRoundedness(0.1);
 mouthPart1.setColour(140, 90, 0);
-mouthPart1.setPosition(0.56, 0.67)
-mouthPart1.setRotation(0)
+mouthPart1.setPosition(0.56, 0.67);
+mouthPart1.setRotation(0);
 
 const mouthPart2 = createShape()
 mouthPart2.setSize(35);
 mouthPart2.setRoundedness(0.1);
 mouthPart2.setColour(140, 90, 0);
-mouthPart2.setPosition(0.60, 0.63)
-mouthPart2.setRotation(0)
+mouthPart2.setPosition(0.60, 0.63);
+mouthPart2.setRotation(0);
 
 const mouthPart3 = createShape()
 mouthPart3.setSize(35);
 mouthPart3.setRoundedness(0.1);
 mouthPart3.setColour(140, 90, 0);
-mouthPart3.setPosition(0.64, 0.67)
-mouthPart3.setRotation(0)
+mouthPart3.setPosition(0.64, 0.67);
+mouthPart3.setRotation(0);
 
 const mouthPart4 = createShape()
 mouthPart4.setSize(35);
 mouthPart4.setRoundedness(0.1);
 mouthPart4.setColour(140, 90, 0);
-mouthPart4.setPosition(0.67, 0.63)
-mouthPart4.setRotation(0)
+mouthPart4.setPosition(0.67, 0.63);
+mouthPart4.setRotation(0);
 
 const mouthPart5 = createShape()
 mouthPart5.setSize(35);
 mouthPart5.setRoundedness(0.1);
 mouthPart5.setColour(140, 90, 0);
-mouthPart5.setPosition(0.69, 0.57)
-mouthPart5.setRotation(0)
+mouthPart5.setPosition(0.69, 0.57);
+mouthPart5.setRotation(0);
 
 const mouthPart6 = createShape()
 mouthPart6.setSize(35);
 mouthPart6.setRoundedness(0.1);
 mouthPart6.setColour(140, 90, 0);
-mouthPart6.setPosition(0.71, 0.51)
-mouthPart6.setRotation(0)
-
+mouthPart6.setPosition(0.71, 0.51);
+mouthPart6.setRotation(0);
 // LEFT
 
 const mouthPart7 = createShape()
 mouthPart7.setSize(35);
 mouthPart7.setRoundedness(0.1);
 mouthPart7.setColour(140, 90, 0);
-mouthPart7.setPosition(0.54, 0.67)
-mouthPart7.setRotation(0)
+mouthPart7.setPosition(0.54, 0.67);
+mouthPart7.setRotation(0);
 
 const mouthPart8 = createShape()
 mouthPart8.setSize(35);
 mouthPart8.setRoundedness(0.1);
 mouthPart8.setColour(140, 90, 0);
-mouthPart8.setPosition(0.5, 0.63)
-mouthPart8.setRotation(0)
+mouthPart8.setPosition(0.5, 0.63);
+mouthPart8.setRotation(0);
 
 const mouthPart9 = createShape()
 mouthPart9.setSize(35);
 mouthPart9.setRoundedness(0.1);
 mouthPart9.setColour(140, 90, 0);
-mouthPart9.setPosition(0.46, 0.67)
-mouthPart9.setRotation(0)
+mouthPart9.setPosition(0.46, 0.67);
+mouthPart9.setRotation(0);
 
 const mouthPart11 = createShape()
 mouthPart11.setSize(35);
 mouthPart11.setRoundedness(0.1);
 mouthPart11.setColour(140, 90, 0);
-mouthPart11.setPosition(0.42, 0.63)
-mouthPart11.setRotation(0)
+mouthPart11.setPosition(0.42, 0.63);
+mouthPart11.setRotation(0);
 
 const mouthPart12 = createShape()
 mouthPart12.setSize(35);
 mouthPart12.setRoundedness(0.1);
 mouthPart12.setColour(140, 90, 0);
-mouthPart12.setPosition(0.4, 0.57)
-mouthPart12.setRotation(0)
+mouthPart12.setPosition(0.4, 0.57);
+mouthPart12.setRotation(0);
 
 const mouthPart13 = createShape()
 mouthPart13.setSize(35);
 mouthPart13.setRoundedness(0.1);
 mouthPart13.setColour(140, 90, 0);
-mouthPart13.setPosition(0.38, 0.51)
-mouthPart13.setRotation(0)
+mouthPart13.setPosition(0.38, 0.51);
+mouthPart13.setRotation(0);
 // ---------- Sound ----------
 // Make the instruments and plug them into the speakers.
 const synth = new Tone.PolySynth(Tone.Syth).toDestination(); // can play several notes at once
@@ -361,12 +370,28 @@ function use() {
 // Runs every time the pointer goes down: a click, a tap or a pen touch.
 function pointerEnter(event) { // browsers only allow sound after the player has pressed something
   //synth.triggerAttack("B3"); // play the note for an eighth note
-  mono.triggerAttack("B3");
+mono.triggerAttack("B" + octave1);
+enteredCircle.push(counter2);
+counter2++
+console.log(enteredCircle);
+
+  if (enteredCircle.length >= 5) {
+  octave1 = octave1 + 1;
+  console.log("The current octave is: " + octave1);
+  }
 }
 
 function pointerLeave(event) {
   //synth.triggerRelease("B3")
-  mono.triggerRelease();
+mono.triggerRelease();
+leftCircle.push(counter2)
+counter++
+console.log("You have left the circle " + leftCircle.length + " times.")
+console.log(leftCircle);
+
+ if (octave1 > 6) {
+   octave1 = 3
+  }
 }
 
 //function positions(event) {
@@ -392,6 +417,7 @@ function setup() {
   //pumpaBackgroud.element.addEventListener("pointerenter", randomNoteMono);
 
   window.addEventListener("keydown", playy);
+  window.addEventListener("pointerclick", Time);
 
   partOfAnEye.element.addEventListener("pointerenter", play1)
   InnerEye.element.addEventListener("pointerenter", play2)
