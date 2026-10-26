@@ -35,7 +35,7 @@ let randomColor1 = Math.floor(Math.random () * 400) + 1;
 let randomColor2 = Math.floor(Math.random () * 250) + 1;
 let randomColor3 = Math.floor(Math.random () * 70) + 1;
 
-const randomNote = ["D1", "E4", "E3", "D4", "A3", "A4", "B3", "F2", "G4"];
+const randomNote = ["D", "E", "B", "D", "A", "F#", "C", "F", "G"];
 const duration   = ["8n", "8n", "8n", "20n", "16n", "10n", "8n", "12n", "8n"];
 let timeNow = [];
 let enteredCircle = [];
@@ -208,6 +208,100 @@ mouthPart13.setRoundedness(0.1);
 mouthPart13.setColour(140, 90, 0);
 mouthPart13.setPosition(0.38, 0.51);
 mouthPart13.setRotation(0);
+
+// sapdoferm
+
+const jump = createShape()
+jump.setSize(40);
+jump.setRoundedness(0.2);
+jump.setColour(245, 400, 20);
+jump.setRotation(250);
+jump.setPosition(0.38, 0.51);
+
+const jump2 = createShape()
+jump2.setSize(20);
+jump2.setRoundedness(0.2);
+jump2.setColour(245, 400, 20);
+jump2.setRotation(250);
+jump2.setPosition(0.38, 0.51);
+
+const jump3 = createShape()
+jump3.setSize(10);
+jump3.setRoundedness(0.2);
+jump3.setColour(245, 400, 20);
+jump3.setRotation(250);
+jump3.setPosition(0.38, 0.51);
+
+const octaveee = createShape()
+octaveee.setSize(130);
+octaveee.setRoundedness(0.2);
+octaveee.setColour(360, 200, 60);
+octaveee.setRotation(250);
+octaveee.setPosition(0.2, 0.1);
+
+let octave2 = 4;
+let octave = 4;
+let timeEnter = [];
+let timeLeave = [];
+let latestX = 0;
+let latestY = 0;
+let lasttime = [];
+let gap = 0;
+let gap2 = 0;
+
+function changeOctaveEnter(event) {
+  timeEnter.push(Date.now());
+for (let i = 1; i < timeEnter.length; i++) {
+  gap = timeEnter[i] - timeEnter[i - 1];
+  console.log(gap + " ms ago you entered");
+}
+
+  if (timeEnter.length > 2) {
+    timeEnter.shift()
+  }
+}
+
+function changeOctaveLeave(event) {
+  timeLeave.push(Date.now());
+for (let i = 1; i < timeLeave.length; i++) {
+  gap2 = timeLeave[i] - timeLeave[i - 1];
+  console.log(gap + " ms ago you left");
+}
+
+  if (timeEnter.length > 2) {
+    timeLeave.shift()
+  }
+}
+
+function calculateOctave(event) {
+  octave2 = gap2 / 1000;
+  console.log("Seconds: " + octave2);
+  octave = Math.floor(octave2 * 10);
+  if (octave > 10) {
+    octave = 9
+  }
+  lasttime.push(octave);
+  if (lasttime.length > 1) {
+    lasttime.shift();
+  }
+  console.log("Current Octave is: " + lasttime[0])
+}
+
+function playEye(event) {
+  let numberRandom = Math.floor(Math.random () * 8) + 1;
+  console.log(randomNote[numberRandom] + octave);
+  synth.triggerAttackRelease(randomNote[numberRandom] + lasttime[0], "20n", Tone.now())
+}
+
+function chase(event) {
+  let normalX = event.clientX / window.innerWidth;
+  let normalY = event.clientY /window.innerHeight;
+  latestX = normalX;
+  latestY = normalY;
+  jump.setPosition(latestX, latestY + 0.03);
+  jump2.setPosition(latestX + 0.015, latestY + 0.085);
+  jump3.setPosition(latestX + 0.023, latestY + 0.11);
+}
 // ---------- Sound ----------
 // Make the instruments and plug them into the speakers.
 const synth = new Tone.PolySynth(Tone.Syth).toDestination(); // can play several notes at once
@@ -225,8 +319,8 @@ console.log(randomColor1, randomColor2, randomColor3);
 function pointerClick(event) {
 
   counter = Math.floor(Math.random () * 8) + 1;
-  console.log(randomNote[counter], duration[counter]);
-  synth.triggerAttackRelease(randomNote[counter], duration[counter]);
+  console.log(randomNote[counter] + octave1, duration[counter]);
+  synth.triggerAttackRelease(randomNote[counter] + octave1, duration[counter]);
 
   shape.setColour(randomColor1, randomColor2, randomColor3);
   randomColor1 = Math.floor(Math.random () * 400) + 1;
@@ -392,6 +486,11 @@ console.log(leftCircle);
  if (octave1 > 6) {
    octave1 = 3
   }
+
+  if (leftCircle.length > 10) {
+    InnerEye.setColour(0, 90, 50);
+    InnerEye2.setColour(0, 90, 50);
+  }
 }
 
 //function positions(event) {
@@ -408,7 +507,7 @@ function setup() {
   const example = createShape("example");
   example.setPosition(0.1, 0.7);
 
-  shape.element.addEventListener("pointerdown", playy);
+  shape.element.addEventListener("pointerdown", pointerClick);
   example.element.addEventListener("pointerenter", pointerEnter);
   example.element.addEventListener("pointerleave", pointerLeave);
   nosePart1.element.addEventListener("pointerenter", playANoteNose2);
@@ -416,14 +515,19 @@ function setup() {
   nosePart3.element.addEventListener("pointerenter", playANoteNose);
   //pumpaBackgroud.element.addEventListener("pointerenter", randomNoteMono);
 
-  window.addEventListener("keydown", playy);
   window.addEventListener("pointerclick", Time);
 
-  partOfAnEye.element.addEventListener("pointerenter", play1)
-  InnerEye.element.addEventListener("pointerenter", play2)
+  partOfAnEye.element.addEventListener("pointerenter", playEye)
+  InnerEye.element.addEventListener("pointerenter", playEye)
 
-  partOfAnEye2.element.addEventListener("pointerenter", play11)
-  InnerEye2.element.addEventListener("pointerenter", play13)
+  partOfAnEye2.element.addEventListener("pointerenter", playEye)
+  InnerEye2.element.addEventListener("pointerenter", playEye)
+
+    window.addEventListener("pointermove", chase);
+
+    octaveee.element.addEventListener("pointerenter", changeOctaveEnter)
+    octaveee.element.addEventListener("pointerleave", changeOctaveLeave)
+    octaveee.element.addEventListener("pointermove", calculateOctave)
 
   mouthPart13.element.addEventListener("pointerenter", play1)
   mouthPart12.element.addEventListener("pointerenter", play2)
