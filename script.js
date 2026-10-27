@@ -400,36 +400,58 @@ function rotate(event) {
    jump17.setRotation(chagneRotation);
 }
 
+let realGap = 0;
+let EnTeR = false;
+
 function changeOctaveEnter(event) {
   timeEnter.push(Date.now());
-for (let i = 1; i < timeEnter.length; i++) {
-  gap = timeEnter[i] - timeEnter[i - 1];
-  console.log(gap + " ms ago you entered");
-}
+//for (let i = 1; i < timeEnter.length; i++) {
+//  gap = timeEnter[i] - timeEnter[i - 1];
+//  console.log(gap + " ms ago you entered");
+//  whenEntered.push(gap)
+//}
 
-  if (timeEnter.length > 2) {
+  if (timeEnter.length > 1) {
     timeEnter.shift()
   }
+
+  //  if (whenEntered.length > 1) {
+  //  whenEntered.shift()
+  //}
+
+  if (EnTeR === false) {
+    EnTeR = true;
+  }
+
+  console.log("entered at: " + timeEnter[0])
 }
 
 function changeOctaveLeave(event) {
   timeLeave.push(Date.now());
-for (let i = 1; i < timeLeave.length; i++) {
-  gap2 = timeLeave[i] - timeLeave[i - 1];
-  console.log(gap + " ms ago you left");
-}
+//for (let i = 1; i < timeLeave.length; i++) {
+//  gap2 = timeLeave[i] - timeLeave[i - 1];
+//  console.log(gap2 + " ms ago you left");
+//  whenLeft.push(gap2);
+//}
 
-  if (timeEnter.length > 2) {
+  if (timeLeave.length > 1) {
     timeLeave.shift()
   }
+
+  console.log("left at: " + timeLeave[0]);
 }
 
 function calculateOctave(event) {
-  octave2 = gap2 / 1000;
+  realGap = timeEnter[0] - timeLeave[0]; // ms
+  console.log("Real gap is: " + realGap);
+  console.log("Entered at: " + timeEnter[0], " and left at: " + timeLeave[0]);
+  octave2 = realGap / 1000;
   console.log("Seconds: " + octave2);
   octave = Math.floor(octave2 * 10);
   if (octave > 10) {
-    octave = 9
+    octave = 9;
+  } else if (octave === NaN) {
+    octave = 7;
   }
   lasttime.push(octave);
   if (lasttime.length > 1) {
@@ -525,16 +547,34 @@ function play12(event) {
   synth.triggerAttackRelease("A4", "20n", Tone.now());
 }
 
+let clickedHAHA = [0];
+let actualClicked = []
+
+function calculateTotal(event) {
+   clickedHAHA.push(1)
+ // for (let blaBla = 0; blaBla < clickedHAHA.length; blaBla++) {
+ //   total = total + clickedHAHA[blaBla]
+ //   console.log(total);
+ //}
+let total = 0, count = 1;
+while (count <= clickedHAHA.length) {
+  total += count;
+  count += 1;
+}
+console.log(total);
+}
+
 function pointerClick(event) {
 
   counter = Math.floor(Math.random () * 8) + 1;
   console.log(randomNote[counter] + octave1, duration[counter]);
-  synth.triggerAttackRelease(randomNote[counter] + octave1, duration[counter]);
+  mono.triggerAttackRelease(randomNote[counter] + octave1, duration[counter]);
 
   shape.setColour(randomColor1, randomColor2, randomColor3);
   randomColor1 = Math.floor(Math.random () * 400) + 1;
   randomColor2 = Math.floor(Math.random () * 200) + 1;
   randomColor3 = Math.floor(Math.random () * 70) + 1;
+
 
   //shape.setPosition(position1Shape, position2Shape)
   //position1Shape = position1Shape + 0.1;
@@ -613,9 +653,11 @@ function playANoteNose3(event) {
 }
 
 function playEye(event) {
+  if (EnTeR === true) {
   let numberRandom = Math.floor(Math.random () * 8) + 1;
   console.log(randomNote[numberRandom] + octave, "20n");
   synth.triggerAttackRelease(randomNote[numberRandom] + lasttime[0], "20n", Tone.now())
+  }
 }
 
 //function positions(event) {
@@ -633,6 +675,7 @@ function setup() {
   example.setPosition(0.1, 0.7);
 
   shape.element.addEventListener("pointerdown", pointerClick);
+  shape.element.addEventListener("pointerdown", calculateTotal);
   example.element.addEventListener("pointerenter", pointerEnter);
   example.element.addEventListener("pointerleave", pointerLeave);
 
