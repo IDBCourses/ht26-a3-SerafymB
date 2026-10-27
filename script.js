@@ -443,12 +443,16 @@ function changeOctaveLeave(event) {
 
 function calculateOctave(event) {
   realGap = timeEnter[0] - timeLeave[0]; // ms
+
   console.log("Real gap is: " + realGap);
   console.log("Entered at: " + timeEnter[0], " and left at: " + timeLeave[0]);
+
   octave2 = realGap / 1000;
   console.log("Seconds: " + octave2);
   octave = Math.floor(octave2 * 10);
-  if (octave > 10) {
+   if (octave === NaN) {
+    octave = 5
+  } else if (octave > 10) {
     octave = 9;
   } else if (octave === NaN) {
     octave = 7;
@@ -560,6 +564,7 @@ let total = 0, count = 1;
 while (count <= clickedHAHA.length) {
   total += count;
   count += 1;
+  actualClicked.push(total);
 }
 console.log(total);
 }
@@ -575,7 +580,7 @@ function pointerClick(event) {
   randomColor2 = Math.floor(Math.random () * 200) + 1;
   randomColor3 = Math.floor(Math.random () * 70) + 1;
 
-
+  
   //shape.setPosition(position1Shape, position2Shape)
   //position1Shape = position1Shape + 0.1;
   //position2Shape = position2Shape + 0.1;
