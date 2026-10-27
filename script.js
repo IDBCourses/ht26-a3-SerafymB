@@ -27,6 +27,8 @@ import { createShape } from "./shape.js";
 // Settings variables should contain all of the "fixed" parts of your programs
 // For example: which notes you can play, how fast things move, the tempo.
 const note = "C4"; // the note played when the pointer goes down
+const randomNote = ["D", "E", "B", "D", "A", "F#", "C", "F", "G"];
+const duration   = ["8n", "8n", "8n", "20n", "16n", "10n", "8n", "12n", "8n"];
 
 // ---------- State ----------
 // State variables are the parts of your program that change over time.
@@ -34,9 +36,6 @@ const note = "C4"; // the note played when the pointer goes down
 let randomColor1 = Math.floor(Math.random () * 400) + 1;
 let randomColor2 = Math.floor(Math.random () * 250) + 1;
 let randomColor3 = Math.floor(Math.random () * 70) + 1;
-
-const randomNote = ["D", "E", "B", "D", "A", "F#", "C", "F", "G"];
-const duration   = ["8n", "8n", "8n", "20n", "16n", "10n", "8n", "12n", "8n"];
 let timeNow = [];
 let enteredCircle = [];
 let leftCircle = [];
@@ -46,6 +45,16 @@ let counter = Math.floor(Math.random () * 8) + 1;
 
 let position1Shape = 0.7;
 let position2Shape = 0.3;
+
+let octave2 = 4;
+let octave = 4;
+let timeEnter = [];
+let timeLeave = [];
+let latestX = 0;
+let latestY = 0;
+let lasttime = [];
+let gap = 0;
+let gap2 = 0;
 
 function Time(event) {
   timeNow.push(Date.now());
@@ -209,28 +218,111 @@ mouthPart13.setColour(140, 90, 0);
 mouthPart13.setPosition(0.38, 0.51);
 mouthPart13.setRotation(0);
 
-// sapdoferm
+// ChasePointer
+
+let chagneRotation = 250;
 
 const jump = createShape()
-jump.setSize(40);
+jump.setSize(30);
 jump.setRoundedness(0.2);
 jump.setColour(245, 400, 20);
-jump.setRotation(250);
 jump.setPosition(0.38, 0.51);
 
 const jump2 = createShape()
-jump2.setSize(20);
+jump2.setSize(30);
 jump2.setRoundedness(0.2);
 jump2.setColour(245, 400, 20);
-jump2.setRotation(250);
 jump2.setPosition(0.38, 0.51);
 
 const jump3 = createShape()
-jump3.setSize(10);
+jump3.setSize(30);
 jump3.setRoundedness(0.2);
 jump3.setColour(245, 400, 20);
-jump3.setRotation(250);
 jump3.setPosition(0.38, 0.51);
+
+const jump4 = createShape()
+jump4.setSize(30);
+jump4.setRoundedness(0.2);
+jump4.setColour(245, 400, 20);
+jump4.setPosition(0.38, 0.51);
+
+const jump5 = createShape()
+jump5.setSize(30);
+jump5.setRoundedness(0.2);
+jump5.setColour(245, 400, 20);
+jump5.setPosition(0.38, 0.51);
+
+const jump6 = createShape()
+jump6.setSize(30);
+jump6.setRoundedness(0.2);
+jump6.setColour(245, 400, 20);
+jump6.setPosition(0.38, 0.51);
+
+const jump7 = createShape()
+jump7.setSize(30);
+jump7.setRoundedness(0.2);
+jump7.setColour(245, 400, 20);
+jump7.setPosition(0.38, 0.51);
+
+const jump8 = createShape()
+jump8.setSize(30);
+jump8.setRoundedness(0.2);
+jump8.setColour(245, 400, 20);
+jump8.setPosition(0.38, 0.51);
+
+const jump9 = createShape()
+jump9.setSize(30);
+jump9.setRoundedness(0.2);
+jump9.setColour(245, 400, 20);
+jump9.setPosition(0.38, 0.51);
+
+const jump10 = createShape()
+jump10.setSize(30);
+jump10.setRoundedness(0.2);
+jump10.setColour(245, 400, 20);
+jump10.setPosition(0.38, 0.51);
+
+const jump11 = createShape()
+jump11.setSize(30);
+jump11.setRoundedness(0.2);
+jump11.setColour(245, 400, 20);
+jump11.setPosition(0.38, 0.51);
+
+const jump12 = createShape()
+jump12.setSize(30);
+jump12.setRoundedness(0.2);
+jump12.setColour(245, 400, 20);
+jump12.setPosition(0.38, 0.51);
+
+const jump13 = createShape()
+jump13.setSize(30);
+jump13.setRoundedness(0.2);
+jump13.setColour(245, 400, 20);
+jump13.setPosition(0.38, 0.51);
+
+const jump14 = createShape()
+jump14.setSize(30);
+jump14.setRoundedness(0.2);
+jump14.setColour(245, 400, 20);
+jump14.setPosition(0.38, 0.51);
+
+const jump15 = createShape()
+jump15.setSize(30);
+jump15.setRoundedness(0.2);
+jump15.setColour(245, 400, 20);
+jump15.setPosition(0.38, 0.51);
+
+const jump16 = createShape()
+jump16.setSize(30);
+jump16.setRoundedness(0.2);
+jump16.setColour(245, 400, 20);
+jump16.setPosition(0.38, 0.51);
+
+const jump17 = createShape()
+jump17.setSize(30);
+jump17.setRoundedness(0.2);
+jump17.setColour(245, 400, 20);
+jump17.setPosition(0.38, 0.51);
 
 const octaveee = createShape()
 octaveee.setSize(130);
@@ -239,15 +331,74 @@ octaveee.setColour(360, 200, 60);
 octaveee.setRotation(250);
 octaveee.setPosition(0.2, 0.1);
 
-let octave2 = 4;
-let octave = 4;
-let timeEnter = [];
-let timeLeave = [];
-let latestX = 0;
-let latestY = 0;
-let lasttime = [];
-let gap = 0;
-let gap2 = 0;
+// ---------- Sound ----------
+// Make the instruments and plug them into the speakers.
+const synth = new Tone.PolySynth(Tone.Syth).toDestination(); // can play several notes at once
+const mono = new Tone.MonoSynth().toDestination();
+
+
+// ---------- Update ----------
+// Update the state. This is called every 100ms.
+function update() {
+  setTimeout(update, 100); // call update() again in 100 milliseconds
+}
+
+function chase(event) {
+  let normalX = event.clientX / window.innerWidth;
+  let normalY = event.clientY /window.innerHeight;
+  latestX = normalX;
+  latestY = normalY;
+  jump.setPosition(latestX - 0.025, latestY - 0.09);
+  jump2.setPosition(latestX, latestY - 0.08);
+  jump2.setColour(0,0,0);
+  jump3.setPosition(latestX + 0.025, latestY - 0.07);
+  jump3.setColour(360,90,60);
+  jump4.setPosition(latestX + 0.050, latestY - 0.05);
+  jump4.setColour(130,90,60);
+  jump5.setPosition(latestX - 0.003, latestY + 0.08);
+  jump6.setPosition(latestX - 0.028, latestY + 0.06);
+  jump7.setPosition(latestX - 0.050, latestY + 0.029);
+  jump8.setColour(222,90,0);
+  jump8.setPosition(latestX - 0.072, latestY - 0.0025);
+  jump7.setColour(10,90,60);
+  jump9.setPosition(latestX - 0.067, latestY - 0.07);
+  jump10.setPosition(latestX - 0.047, latestY - 0.09);
+  jump11.setPosition(latestX - 0.086, latestY - 0.04);
+  jump11.setColour(265,90,60);
+  jump12.setPosition(latestX + 0.019, latestY + 0.09);
+  jump13.setPosition(latestX + 0.070, latestY - 0.019);
+  jump14.setPosition(latestX + 0.086, latestY + 0.016);
+
+  jump15.setPosition(latestX + 0.082, latestY + 0.066);
+  jump15.setColour(156,90,60);
+  jump16.setPosition(latestX + 0.063, latestY + 0.099);
+  jump17.setPosition(latestX + 0.043, latestY + 0.1);
+}
+
+function rotate(event) {
+  chagneRotation = chagneRotation + 19;
+  if (chagneRotation > 359) {
+    chagneRotation
+  }
+
+   jump.setRotation(chagneRotation);
+   jump2.setRotation(chagneRotation);
+   jump3.setRotation(chagneRotation);
+   jump4.setRotation(chagneRotation);
+   jump5.setRotation(chagneRotation);
+   jump6.setRotation(chagneRotation);
+   jump7.setRotation(chagneRotation);
+   jump8.setRotation(chagneRotation);
+   jump9.setRotation(chagneRotation);
+   jump10.setRotation(chagneRotation);
+   jump11.setRotation(chagneRotation);
+   jump12.setRotation(chagneRotation);
+   jump13.setRotation(chagneRotation);
+   jump14.setRotation(chagneRotation);
+   jump15.setRotation(chagneRotation);
+   jump16.setRotation(chagneRotation);
+   jump17.setRotation(chagneRotation);
+}
 
 function changeOctaveEnter(event) {
   timeEnter.push(Date.now());
@@ -287,34 +438,92 @@ function calculateOctave(event) {
   console.log("Current Octave is: " + lasttime[0])
 }
 
-function playEye(event) {
-  let numberRandom = Math.floor(Math.random () * 8) + 1;
-  console.log(randomNote[numberRandom] + octave);
-  synth.triggerAttackRelease(randomNote[numberRandom] + lasttime[0], "20n", Tone.now())
+// ---------- Use ----------
+// Use the state to make sound and move shapes. This is called every 100ms.
+function use() {
+  setTimeout(use, 100); // call use() again in 100 milliseconds
 }
 
-function chase(event) {
-  let normalX = event.clientX / window.innerWidth;
-  let normalY = event.clientY /window.innerHeight;
-  latestX = normalX;
-  latestY = normalY;
-  jump.setPosition(latestX, latestY + 0.03);
-  jump2.setPosition(latestX + 0.015, latestY + 0.085);
-  jump3.setPosition(latestX + 0.023, latestY + 0.11);
-}
-// ---------- Sound ----------
-// Make the instruments and plug them into the speakers.
-const synth = new Tone.PolySynth(Tone.Syth).toDestination(); // can play several notes at once
-const mono = new Tone.MonoSynth().toDestination();
+// ---------- Controls (Event Handlers) ----------
+// Runs every time the pointer goes down: a click, a tap or a pen touch.
+function pointerEnter(event) { // browsers only allow sound after the player has pressed something
+  //synth.triggerAttack("B3"); // play the note for an eighth note
+mono.triggerAttack("B" + octave1);
+enteredCircle.push(counter2);
+counter2++
+console.log(enteredCircle);
 
-
-// ---------- Update ----------
-// Update the state. This is called every 100ms.
-function update() {
-  setTimeout(update, 100); // call update() again in 100 milliseconds
+  if (enteredCircle.length >= 5) {
+  octave1 = octave1 + 1;
+  console.log("The current octave is: " + octave1);
+  }
 }
 
-console.log(randomColor1, randomColor2, randomColor3);
+function pointerLeave(event) {
+  //synth.triggerRelease("B3")
+mono.triggerRelease();
+leftCircle.push(counter2)
+counter++
+console.log("You have left the circle " + leftCircle.length + " times.")
+console.log(leftCircle);
+
+ if (octave1 > 6) {
+   octave1 = 3
+  }
+
+  if (leftCircle.length > 10) {
+    InnerEye.setColour(0, 90, 50);
+    InnerEye2.setColour(0, 90, 50);
+  }
+}
+
+function play1(event) {
+  synth.triggerAttackRelease("E3", "20n", Tone.now());
+}
+
+function play2(event) {
+  synth.triggerAttackRelease("B4", "20n", Tone.now());
+}
+
+function play3(event) {
+  synth.triggerAttackRelease("E3", "20n", Tone.now());
+}
+
+function play4(event) {
+  synth.triggerAttackRelease("B4", "20n", Tone.now());
+}
+
+function play5(event) {
+  synth.triggerAttackRelease("E2", "20n", Tone.now());
+}
+
+function play6(event) {
+  synth.triggerAttackRelease("E3", "20n", Tone.now());
+}
+
+function play7(event) {
+  synth.triggerAttackRelease("C4", "20n", Tone.now());
+}
+
+function play8(event) {
+  synth.triggerAttackRelease("C5", "20n", Tone.now());
+}
+
+function play9(event) {
+  synth.triggerAttackRelease("B4", "20n", Tone.now());
+}
+
+function play10(event) {
+  synth.triggerAttackRelease("E2", "20n", Tone.now());
+}
+
+function play11(event) {
+  synth.triggerAttackRelease("E3", "20n", Tone.now());
+}
+
+function play12(event) {
+  synth.triggerAttackRelease("A4", "20n", Tone.now());
+}
 
 function pointerClick(event) {
 
@@ -379,58 +588,6 @@ if (position1Shape > 0.9) {
   }
 }
 
-function play1(event) {
-  synth.triggerAttackRelease("E3", "20n", Tone.now());
-}
-
-function play2(event) {
-  synth.triggerAttackRelease("B4", "20n", Tone.now());
-}
-
-function play3(event) {
-  synth.triggerAttackRelease("E3", "20n", Tone.now());
-}
-
-function play4(event) {
-  synth.triggerAttackRelease("B4", "20n", Tone.now());
-}
-
-function play5(event) {
-  synth.triggerAttackRelease("E2", "20n", Tone.now());
-}
-
-function play6(event) {
-  synth.triggerAttackRelease("E3", "20n", Tone.now());
-}
-
-function play7(event) {
-  synth.triggerAttackRelease("C4", "20n", Tone.now());
-}
-
-function play8(event) {
-  synth.triggerAttackRelease("C5", "20n", Tone.now());
-}
-
-function play9(event) {
-  synth.triggerAttackRelease("B4", "20n", Tone.now());
-}
-
-function play10(event) {
-  synth.triggerAttackRelease("E2", "20n", Tone.now());
-}
-
-function play11(event) {
-  synth.triggerAttackRelease("E3", "20n", Tone.now());
-}
-
-function play12(event) {
-  synth.triggerAttackRelease("A4", "20n", Tone.now());
-}
-
-function play13(event) {
-  synth.triggerAttackRelease("B2", "20n", Tone.now());
-}
-
 function randomNoteMono(event) {
   counter = Math.floor(Math.random () * 8) + 1;
   console.log(randomNote[counter], duration[counter]);
@@ -452,45 +609,13 @@ function playANoteNose2(event) {
 }
 
 function playANoteNose3(event) {
-   synth.triggerAttackRelease("E2", "8n");
-}
-// ---------- Use ----------
-// Use the state to make sound and move shapes. This is called every 100ms.
-function use() {
-  setTimeout(use, 100); // call use() again in 100 milliseconds
+   mono.triggerAttackRelease("E4", "8n");
 }
 
-// ---------- Controls (Event Handlers) ----------
-// Runs every time the pointer goes down: a click, a tap or a pen touch.
-function pointerEnter(event) { // browsers only allow sound after the player has pressed something
-  //synth.triggerAttack("B3"); // play the note for an eighth note
-mono.triggerAttack("B" + octave1);
-enteredCircle.push(counter2);
-counter2++
-console.log(enteredCircle);
-
-  if (enteredCircle.length >= 5) {
-  octave1 = octave1 + 1;
-  console.log("The current octave is: " + octave1);
-  }
-}
-
-function pointerLeave(event) {
-  //synth.triggerRelease("B3")
-mono.triggerRelease();
-leftCircle.push(counter2)
-counter++
-console.log("You have left the circle " + leftCircle.length + " times.")
-console.log(leftCircle);
-
- if (octave1 > 6) {
-   octave1 = 3
-  }
-
-  if (leftCircle.length > 10) {
-    InnerEye.setColour(0, 90, 50);
-    InnerEye2.setColour(0, 90, 50);
-  }
+function playEye(event) {
+  let numberRandom = Math.floor(Math.random () * 8) + 1;
+  console.log(randomNote[numberRandom] + octave, "20n");
+  synth.triggerAttackRelease(randomNote[numberRandom] + lasttime[0], "20n", Tone.now())
 }
 
 //function positions(event) {
@@ -510,6 +635,7 @@ function setup() {
   shape.element.addEventListener("pointerdown", pointerClick);
   example.element.addEventListener("pointerenter", pointerEnter);
   example.element.addEventListener("pointerleave", pointerLeave);
+
   nosePart1.element.addEventListener("pointerenter", playANoteNose2);
   nosePart2.element.addEventListener("pointerenter", playANoteNose3);
   nosePart3.element.addEventListener("pointerenter", playANoteNose);
@@ -524,6 +650,7 @@ function setup() {
   InnerEye2.element.addEventListener("pointerenter", playEye)
 
     window.addEventListener("pointermove", chase);
+    window.addEventListener("pointermove", rotate);
 
     octaveee.element.addEventListener("pointerenter", changeOctaveEnter)
     octaveee.element.addEventListener("pointerleave", changeOctaveLeave)
