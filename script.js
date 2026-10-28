@@ -375,29 +375,19 @@ function chase(event) {
   jump17.setPosition(latestX + 0.043, latestY + 0.1);
 }
 
+let arrayOfJumpShapes = [jump, jump2, jump3, jump4, jump5, jump6,
+  jump7, jump8, jump9, jump10, jump11, jump12, jump13,
+   jump14, jump15, jump16, jump17]
+
 function rotate(event) {
   chagneRotation = chagneRotation + 19;
   if (chagneRotation > 359) {
     chagneRotation
   }
-
-   jump.setRotation(chagneRotation);
-   jump2.setRotation(chagneRotation);
-   jump3.setRotation(chagneRotation);
-   jump4.setRotation(chagneRotation);
-   jump5.setRotation(chagneRotation);
-   jump6.setRotation(chagneRotation);
-   jump7.setRotation(chagneRotation);
-   jump8.setRotation(chagneRotation);
-   jump9.setRotation(chagneRotation);
-   jump10.setRotation(chagneRotation);
-   jump11.setRotation(chagneRotation);
-   jump12.setRotation(chagneRotation);
-   jump13.setRotation(chagneRotation);
-   jump14.setRotation(chagneRotation);
-   jump15.setRotation(chagneRotation);
-   jump16.setRotation(chagneRotation);
-   jump17.setRotation(chagneRotation);
+       for (let i = 0; i < arrayOfJumpShapes.length; i++) {
+   let whatShapeShoudlIRotate = arrayOfJumpShapes[i]
+   whatShapeShoudlIRotate.setRotation(chagneRotation)
+       }
 }
 
 let realGap = 0;
@@ -405,19 +395,10 @@ let EnTeR = false;
 
 function changeOctaveEnter(event) {
   timeEnter.push(Date.now());
-//for (let i = 1; i < timeEnter.length; i++) {
-//  gap = timeEnter[i] - timeEnter[i - 1];
-//  console.log(gap + " ms ago you entered");
-//  whenEntered.push(gap)
-//}
 
   if (timeEnter.length > 1) {
     timeEnter.shift()
   }
-
-  //  if (whenEntered.length > 1) {
-  //  whenEntered.shift()
-  //}
 
   if (EnTeR === false) {
     EnTeR = true;
@@ -428,11 +409,6 @@ function changeOctaveEnter(event) {
 
 function changeOctaveLeave(event) {
   timeLeave.push(Date.now());
-//for (let i = 1; i < timeLeave.length; i++) {
-//  gap2 = timeLeave[i] - timeLeave[i - 1];
-//  console.log(gap2 + " ms ago you left");
-//  whenLeft.push(gap2);
-//}
 
   if (timeLeave.length > 1) {
     timeLeave.shift()
@@ -442,7 +418,7 @@ function changeOctaveLeave(event) {
 }
 
 function calculateOctave(event) {
-  realGap = timeEnter[0] - timeLeave[0]; // ms
+  realGap = timeLeave[0] - timeEnter[0]; // ms
 
   console.log("Real gap is: " + realGap);
   console.log("Entered at: " + timeEnter[0], " and left at: " + timeLeave[0]);
@@ -473,7 +449,6 @@ function use() {
 // ---------- Controls (Event Handlers) ----------
 // Runs every time the pointer goes down: a click, a tap or a pen touch.
 function pointerEnter(event) { // browsers only allow sound after the player has pressed something
-  //synth.triggerAttack("B3"); // play the note for an eighth note
 mono.triggerAttack("B" + octave1);
 enteredCircle.push(counter2);
 counter2++
@@ -486,7 +461,6 @@ console.log(enteredCircle);
 }
 
 function pointerLeave(event) {
-  //synth.triggerRelease("B3")
 mono.triggerRelease();
 leftCircle.push(counter2)
 counter++
@@ -580,7 +554,7 @@ function pointerClick(event) {
   randomColor2 = Math.floor(Math.random () * 200) + 1;
   randomColor3 = Math.floor(Math.random () * 70) + 1;
 
-  
+
   //shape.setPosition(position1Shape, position2Shape)
   //position1Shape = position1Shape + 0.1;
   //position2Shape = position2Shape + 0.1;
@@ -702,7 +676,7 @@ function setup() {
 
     octaveee.element.addEventListener("pointerenter", changeOctaveEnter)
     octaveee.element.addEventListener("pointerleave", changeOctaveLeave)
-    octaveee.element.addEventListener("pointermove", calculateOctave)
+    octaveee.element.addEventListener("pointerleave", calculateOctave)
 
   mouthPart13.element.addEventListener("pointerenter", play1)
   mouthPart12.element.addEventListener("pointerenter", play2)
