@@ -26,9 +26,16 @@ import { createShape } from "./shape.js";
 // ---------- Settings ----------
 // Settings variables should contain all of the "fixed" parts of your programs
 // For example: which notes you can play, how fast things move, the tempo.
-const note = "C4"; // the note played when the pointer goes down
 const randomNote = ["D", "E", "B", "D", "A", "F#", "C", "F", "G"];
 const duration   = ["8n", "8n", "8n", "20n", "16n", "10n", "8n", "12n", "8n"];
+const newNotes = ["D3", "C#4", "D#4", "A#4",
+   "G#4", "F#4", "F4", "G4", "B4",
+    "E4", "C4", "C5", "G5",
+     "A3", "E3", "E2",
+      "B5", "D5",
+       "G3",
+        "F3"
+      ]
 
 // ---------- State ----------
 // State variables are the parts of your program that change over time.
@@ -55,16 +62,15 @@ let EnTeR = false;
 
  let amountOfClicks = [];
 
-let position1Shape = 0.7;
-let position2Shape = 0.3;
 
+//The famous blue square in the left corner
 const shape = createShape()
 shape.setSize(50);
 shape.setRoundedness(0.2);
 shape.setColour(245, 400, 20);
 shape.setRotation(250);
 
-// PUMCIN
+// PUMCIN shapes, nothing interesting in particular
 
 const pumpaBackgroud = createShape();
 pumpaBackgroud.setSize(630);
@@ -78,7 +84,7 @@ pumpa.setRoundedness(0.5);
 pumpa.setColour(34, 250, 50);
 pumpa.setPosition(0.33, 0.1);
 
-// EYES
+// EYES shapes, nothing interesting in particular
 
 const partOfAnEye = createShape()
 partOfAnEye.setSize(60);
@@ -104,7 +110,7 @@ InnerEye2.setRoundedness(0.1);
 InnerEye2.setColour(140, 90, 50);
 InnerEye2.setPosition(0.65, 0.36);
 
-// NOSE
+// NOSE shapes, nothing interesting in particular
 
 const nosePart1 = createShape()
 nosePart1.setSize(44);
@@ -127,7 +133,7 @@ nosePart3.setColour(140, 90, 0);
 nosePart3.setPosition(0.54, 0.42);
 nosePart3.setRotation(90);
 
-// MOUTH
+// MOUTH shapes, for loops are used to reduce the amount of code
 
 //RIGHT
 const mouthPart1 = createShape()
@@ -167,7 +173,7 @@ mouthPart12.setPosition(0.4, 0.57);
 const mouthPart13 = createShape()
 mouthPart13.setPosition(0.38, 0.51);
 
-// ChasePointer
+// ChasePointer shapes, nothing interesting in particular
 
 let chagneRotation = 250;
 
@@ -239,21 +245,27 @@ const jump17 = createShape()
 jump17.setColour(245, 400, 20);
 jump17.setPosition(0.38, 0.51);
 
-let arrayOfMouthParts = [
-  mouthPart1, mouthPart2, mouthPart3,
-  mouthPart4, mouthPart5, mouthPart6,
-  mouthPart7, mouthPart8, mouthPart9,
-  mouthPart11, mouthPart12, mouthPart13
-]
 
-let arrayOfJumpShapes = [jump, jump2, jump3, jump4, jump5, jump6,
-  jump7, jump8, jump9, jump10, jump11, jump12, jump13,
-   jump14, jump15, jump16, jump17]
+//These arrays have to be placed after all the shapes because  // otherwise a few functions do not work.
+let arrayOfJumpShapes = [jump, jump2, jump3, jump4,
+  jump5,jump6, jump7, jump8, jump9, jump10,
+  jump11, jump12, jump13, jump14,
+  jump15, jump16,
+  jump17
+  ]
 
      let partsOfTheHat = [shape
   ];
 
-function shortenTheAmountOfCode(event){
+  let arrayOfMouthParts = [
+  mouthPart13, mouthPart12, mouthPart11, mouthPart9,
+  mouthPart8,mouthPart7, mouthPart1,
+  mouthPart2, mouthPart3,
+  mouthPart4, mouthPart5,
+  mouthPart6
+]
+
+function shortenTheAmountOfCode(event){ //Shortens the amount of code by using for loops
 for (let i = 0; i < arrayOfJumpShapes.length; i++) {
    let whichOne = arrayOfJumpShapes[i]
    whichOne.setSize(30);
@@ -268,6 +280,7 @@ for (let i = 0; i < arrayOfJumpShapes.length; i++) {
  }
       }
 
+      // The red square that calculates the octave
 const octaveee = createShape()
 octaveee.setSize(130);
 octaveee.setRoundedness(0.2);
@@ -280,8 +293,7 @@ octaveee.setPosition(0.2, 0.1);
 const synth = new Tone.PolySynth(Tone.Syth).toDestination(); // can play several notes at once
 const mono = new Tone.MonoSynth().toDestination();
 const favoritSynth = new Tone.AMSynth().toDestination();
-
-
+const newSynth = new Tone.FMSynth().toDestination();
 // ---------- Update ----------
 // Update the state. This is called every 100ms.
 function update() {
@@ -321,7 +333,8 @@ function chase(event) {
   jump17.setPosition(latestX + 0.043, latestY + 0.1);
 }
 
-function rotate(event) {
+function rotate(event) { //Makes the thing that follows the pointer to rotate every
+                          //time the user moves the pointer while being in the window
   chagneRotation = chagneRotation + 19;
   if (chagneRotation > 359) {
     chagneRotation
@@ -332,7 +345,7 @@ function rotate(event) {
        }
 }
 
-function changeOctaveEnter(event) {
+function changeOctaveEnter(event) { //sends the time you enter the red square to an array
   timeEnter.push(Date.now());
 
   if (timeEnter.length > 1) {
@@ -346,7 +359,7 @@ function changeOctaveEnter(event) {
   console.log("entered at: " + timeEnter[0])
 }
 
-function changeOctaveLeave(event) {
+function changeOctaveLeave(event) { //sends the time you left the red square to an array
   timeLeave.push(Date.now());
 
   if (timeLeave.length > 1) {
@@ -356,7 +369,7 @@ function changeOctaveLeave(event) {
   console.log("left at: " + timeLeave[0]);
 }
 
-function calculateOctave(event) {
+function calculateOctave(event) { //calculates the octave for "pumkin's eyes".
   realGap = timeLeave[0] - timeEnter[0]; // ms
 
   console.log("Real gap is: " + realGap);
@@ -387,7 +400,8 @@ function use() {
 
 // ---------- Controls (Event Handlers) ----------
 // Runs every time the pointer goes down: a click, a tap or a pen touch.
-function pointerEnter(event) { // browsers only allow sound after the player has pressed something
+
+function pointerEnter(event) { // Plays a note and counts how many times you have entered the circle.
 mono.triggerAttack("B" + octave1);
 enteredCircle.push(counter2);
 counter2++
@@ -399,7 +413,7 @@ console.log(enteredCircle);
   }
 }
 
-function pointerLeave(event) {
+function pointerLeave(event) { // Stops a note and countes how many times you left, if more than 10 the eyes get red.
 mono.triggerRelease();
 leftCircle.push(counter2)
 counter++
@@ -416,6 +430,7 @@ console.log(leftCircle);
   }
 }
 
+// Quite a few function to make the mouth play, most of the MouthParts play different notes, did not figure out how to make this one shorter.
 function play1(event) {
   synth.triggerAttackRelease("E3", "20n", Tone.now());
 }
@@ -464,32 +479,20 @@ function play12(event) {
   synth.triggerAttackRelease("A4", "20n", Tone.now());
 }
 
-function pointerClick(event) {
+function pointerClick(event) { //Plays a random note for the square that builds the hatt. 
 
   counter = Math.floor(Math.random () * 8) + 1;
   console.log(randomNote[counter] + octave1, duration[counter]);
   favoritSynth.triggerAttackRelease(randomNote[counter] + octave1, duration[counter]);
 
-  shape.setColour(randomColor1, randomColor2, randomColor3);
-  randomColor1 = Math.floor(Math.random () * 400) + 1;
-  randomColor2 = Math.floor(Math.random () * 200) + 1;
-  randomColor3 = Math.floor(Math.random () * 70) + 1;
-
-  //shape.setPosition(position1Shape, position2Shape)
-  //position1Shape = position1Shape + 0.1;
-  //position2Shape = position2Shape + 0.1;
-  //console.log("The settings for the color for the circle are ", randomColor1, randomColor2, randomColor3);
-
-  //if (position1Shape > 0.9) {
-  //  position1Shape = 0.2
-  //  console.log("The positions on x and y for the shape are: ", position1Shape, position2Shape)
-  //} else if (position2Shape > 0.9) {
-  //  position2Shape = 0.3
-  //  console.log("The positions on x and y for the shape are: ", position1Shape, position2Shape)
-  //}
+   /*shape.setColour(randomColor1, randomColor2, randomColor3);
+   randomColor1 = Math.floor(Math.random () * 400) + 1;
+   randomColor2 = Math.floor(Math.random () * 200) + 1;
+   randomColor3 = Math.floor(Math.random () * 70) + 1;*/
   }
 
-  function showTheHat(event) {
+  function showTheHat(event) { //Shows the hatt based on how many times you clicked and
+                              // also makes it interactive through adding addEventListeners
 
     for (let index = 0; index < partsOfTheHat.length; index++) {
       console.log(partsOfTheHat[index]);
@@ -501,132 +504,153 @@ function pointerClick(event) {
 
        amountOfClicks.push(1);
    if (amountOfClicks.length === 1) {
-    const hat1 = createShape()
-    partsOfTheHat.push(hat1);
-    hat1.setPosition(0.33, 0.22);
+    const hatt1 = createShape()
+    partsOfTheHat.push(hatt1);
+    hatt1.setPosition(0.33, 0.22);
+    hatt1.element.addEventListener("pointerenter", playHeat1);
    }
 
       if (amountOfClicks.length === 2) {
-    const hat2 = createShape()
-    partsOfTheHat.push(hat2);
-    hat2.setPosition(0.38, 0.19);
+    const hatt2 = createShape()
+    partsOfTheHat.push(hatt2);
+    hatt2.setPosition(0.38, 0.19);
+    hatt2.element.addEventListener("pointerenter", playHeat1);
    }
 
       if (amountOfClicks.length === 3) {
-    const hat3 = createShape()
-    partsOfTheHat.push(hat3);
-    hat3.setPosition(0.43, 0.16);
+    const hatt3 = createShape()
+    partsOfTheHat.push(hatt3);
+    hatt3.setPosition(0.43, 0.16);
+    hatt3.element.addEventListener("pointerenter", playHeat2);
    }
 
       if (amountOfClicks.length === 4) {
-    const hat4 = createShape()
-    partsOfTheHat.push(hat4);
-    hat4.setPosition(0.48, 0.13);
+    const hatt4 = createShape()
+    partsOfTheHat.push(hatt4);
+    hatt4.setPosition(0.48, 0.13);
+    hatt4.element.addEventListener("pointerenter", playHeat2);
    }
 
       if (amountOfClicks.length === 5) {
-    const hat5 = createShape()
-    partsOfTheHat.push(hat5);
-    hat5.setPosition(0.53, 0.10);
+    const hatt5 = createShape()
+    partsOfTheHat.push(hatt5);
+    hatt5.setPosition(0.53, 0.10);
+    hatt5.element.addEventListener("pointerenter", playHeat4);
    }
 
       if (amountOfClicks.length === 6) {
-    const hat6 = createShape()
-    partsOfTheHat.push(hat6);
-    hat6.setPosition(0.58, 0.1);
+    const hatt6 = createShape()
+    partsOfTheHat.push(hatt6);
+    hatt6.setPosition(0.58, 0.1);
+    hatt6.element.addEventListener("pointerenter", playHeat4);
    }
 
       if (amountOfClicks.length === 7) {
-    const hat7 = createShape()
-    partsOfTheHat.push(hat7);
-    hat7.setPosition(0.63, 0.13);
+    const hatt7 = createShape()
+    partsOfTheHat.push(hatt7);
+    hatt7.setPosition(0.63, 0.13);
+    hatt7.element.addEventListener("pointerenter", playHeat4);
    }
 
       if (amountOfClicks.length === 8) {
-    const hat8 = createShape()
-    partsOfTheHat.push(hat8);
-    hat8.setPosition(0.68, 0.16);
+    const hatt8 = createShape()
+    partsOfTheHat.push(hatt8);
+    hatt8.setPosition(0.68, 0.16);
+    hatt8.element.addEventListener("pointerenter", playHeat4);
    }
 
       if (amountOfClicks.length === 9) {
-    const hat9 = createShape()
-    partsOfTheHat.push(hat9);
-    hat9.setPosition(0.73, 0.23);
+    const hatt9 = createShape()
+    partsOfTheHat.push(hatt9);
+    hatt9.setPosition(0.73, 0.23);
+    hatt9.element.addEventListener("pointerenter", playHeat4);
    }
 
       if (amountOfClicks.length === 10) {
-    const hat10 = createShape()
-    partsOfTheHat.push(hat10);
-    hat10.setPosition(0.408, 0.136);
+    const hatt10 = createShape()
+    partsOfTheHat.push(hatt10);
+    hatt10.setPosition(0.408, 0.136);
+    hatt10.element.addEventListener("pointerenter", playHeat2);
    }
 
       if (amountOfClicks.length === 11) {
-    const hat11 = createShape()
-    partsOfTheHat.push(hat11);
-    hat11.setPosition(0.625, 0.07);
+    const hatt11 = createShape()
+    partsOfTheHat.push(hatt11);
+    hatt11.setPosition(0.625, 0.07);
+    hatt11.element.addEventListener("pointerenter", playHeat1);
    }
 
       if (amountOfClicks.length === 12) {
-    const hat12 = createShape()
-    partsOfTheHat.push(hat12);
-    hat12.setPosition(0.45, 0.1);
+    const hatt12 = createShape()
+    partsOfTheHat.push(hatt12);
+    hatt12.setPosition(0.45, 0.1);
+    hatt12.element.addEventListener("pointerenter", playHeat1);
    }
 
       if (amountOfClicks.length === 13) {
-    const hat13 = createShape()
-    partsOfTheHat.push(hat13);
-    hat13.setPosition(0.50, 0.07);
+    const hatt13 = createShape()
+    partsOfTheHat.push(hatt13);
+    hatt13.setPosition(0.50, 0.07);
+    hatt13.element.addEventListener("pointerenter", playHeat2);
    }
 
       if (amountOfClicks.length === 14) {
-    const hat14 = createShape()
-    partsOfTheHat.push(hat14);
-    hat14.setPosition(0.56, 0.06);
+    const hatt14 = createShape()
+    partsOfTheHat.push(hatt14);
+    hatt14.setPosition(0.56, 0.06);
+    hatt14.element.addEventListener("pointerenter", playHeat4);
    }
 
       if (amountOfClicks.length === 15) {
-    const hat15 = createShape()
-    partsOfTheHat.push(hat15);
-    hat15.setPosition(0.56, 0);
+    const hatt15 = createShape()
+    partsOfTheHat.push(hatt15);
+    hatt15.setPosition(0.56, 0);
+    hatt15.element.addEventListener("pointerenter", playHeat2);
    }
 
       if (amountOfClicks.length === 16) {
-    const hat16 = createShape()
-    partsOfTheHat.push(hat16);
-    hat16.setPosition(0.72, 0.18);
+    const hatt16 = createShape()
+    partsOfTheHat.push(hatt16);
+    hatt16.setPosition(0.72, 0.18);
+    hatt16.element.addEventListener("pointerenter", playHeat2);
    }
 
       if (amountOfClicks.length === 17) {
-    const hat17 = createShape()
-    partsOfTheHat.push(hat17);
-    hat17.setPosition(0.35, 0.16);
+    const hatt17 = createShape()
+    partsOfTheHat.push(hatt17);
+    hatt17.setPosition(0.35, 0.16);
+    hatt17.element.addEventListener("pointerenter", playHeat1);
    }
 
       if (amountOfClicks.length === 18) {
-    const hat18 = createShape()
-    partsOfTheHat.push(hat18);
-    hat18.setPosition(0.67, 0.1);
+    const hatt18 = createShape()
+    partsOfTheHat.push(hatt18);
+    hatt18.setPosition(0.67, 0.1);
+    hatt18.element.addEventListener("pointerenter", playHeat2);
    }
 
       if (amountOfClicks.length === 19) {
-    const hat19 = createShape()
-    partsOfTheHat.push(hat19);
-    hat19.setSize(50, 100);
-    hat19.setPosition(0.74, 0.318);
+    const hatt19 = createShape()
+    partsOfTheHat.push(hatt19);
+    hatt19.setSize(50, 100);
+    hatt19.setPosition(0.74, 0.318);
+    hatt19.element.addEventListener("pointerenter", playHeat4);
    }
 
       if (amountOfClicks.length === 20) {
-    const hat20 = createShape()
-    partsOfTheHat.push(hat20);
-    hat20.setSize(50, 100);
-    hat20.setPosition(0.333, 0.309);
+    const hatt20 = createShape()
+    partsOfTheHat.push(hatt20);
+    hatt20.setSize(50, 100);
+    hatt20.setPosition(0.333, 0.309);
+    hatt20.element.addEventListener("pointerenter", playHeat2);
    }
 
       if (amountOfClicks.length === 21) {
-    const hat21 = createShape()
-    partsOfTheHat.push(hat21);
-    hat21.setSize(50, 100);
-    hat21.setPosition(0.55, 0.18);
+    const hatt21 = createShape()
+    partsOfTheHat.push(hatt21);
+    hatt21.setSize(50, 100);
+    hatt21.setPosition(0.55, 0.18);
+    hatt21.element.addEventListener("pointerenter", playHeat1);
    }
   }
 
@@ -680,6 +704,7 @@ function pointerClick(event) {
 //  synth.triggerAttackRelease(randomNote[counter], duration[counter]);
 //}
 
+//A few functions that make the noseParts play
 function playANoteNose(event) {
    synth.triggerAttackRelease("E4", "8n");
 }
@@ -692,12 +717,31 @@ function playANoteNose3(event) {
    mono.triggerAttackRelease("E4", "8n");
 }
 
-function playEye(event) {
+function playEye(event) { //Plays random notes with the calculated octave (based on how long you have been in the red square)
   if (EnTeR === true) {
   let numberRandom = Math.floor(Math.random () * 8) + 1;
   console.log(randomNote[numberRandom] + octave, "20n");
   synth.triggerAttackRelease(randomNote[numberRandom] + lasttime[0], "20n", Tone.now())
   }
+}
+
+//Three functions that use different synth.
+function playHeat1(event) {
+  let numberRandom2 = Math.floor(Math.random () * 19) + 1;
+  console.log(newNotes[numberRandom2], "20n");
+  newSynth.triggerAttackRelease(newNotes[numberRandom2], "20n", Tone.now())
+}
+
+function playHeat2(event) {
+  let numberRandom3 = Math.floor(Math.random () * 19) + 1;
+  console.log(newNotes[numberRandom3], "20n");
+  favoritSynth.triggerAttackRelease(newNotes[numberRandom3], "20n", Tone.now())
+}
+
+function playHeat4(event) {
+  let numberRandom3 = Math.floor(Math.random () * 19) + 1;
+  console.log(newNotes[numberRandom3], "20n");
+  mono.triggerAttackRelease(newNotes[numberRandom3], "20n", Tone.now())
 }
 
 //function positions(event) {
@@ -728,19 +772,20 @@ function setup() {
   nosePart3.element.addEventListener("pointerenter", playANoteNose);
   //pumpaBackgroud.element.addEventListener("pointerenter", randomNoteMono);
 
-  partOfAnEye.element.addEventListener("pointerenter", playEye)
-  InnerEye.element.addEventListener("pointerenter", playEye)
+  partOfAnEye.element.addEventListener("pointerenter", playEye);
+  InnerEye.element.addEventListener("pointerenter", playEye);
 
-  partOfAnEye2.element.addEventListener("pointerenter", playEye)
-  InnerEye2.element.addEventListener("pointerenter", playEye)
+  partOfAnEye2.element.addEventListener("pointerenter", playEye);
+  InnerEye2.element.addEventListener("pointerenter", playEye);
 
     window.addEventListener("pointermove", chase);
     window.addEventListener("pointermove", rotate);
 
-    octaveee.element.addEventListener("pointerenter", changeOctaveEnter)
-    octaveee.element.addEventListener("pointerleave", changeOctaveLeave)
-    octaveee.element.addEventListener("pointerleave", calculateOctave)
+    octaveee.element.addEventListener("pointerenter", changeOctaveEnter);
+    octaveee.element.addEventListener("pointerleave", changeOctaveLeave);
+    octaveee.element.addEventListener("pointerleave", calculateOctave);
 
+   // window.addEventListener("pointerdown", sortTheParts);
   mouthPart13.element.addEventListener("pointerenter", play1)
   mouthPart12.element.addEventListener("pointerenter", play2)
   mouthPart11.element.addEventListener("pointerenter", play3)
