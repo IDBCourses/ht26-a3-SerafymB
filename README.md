@@ -1,10 +1,11 @@
 # My instrument
 
-**Play it here:** <!-- Paste your GitHub Pages link here, e.g. https://idbcourses.github.io/your-repo-name/ -->
+**Play it here: https://idbcourses.github.io/ht26-a3-SerafymB/** <!-- Paste your GitHub Pages link here, e.g. https://idbcourses.github.io/your-repo-name/ -->
 
-**Name:** <!-- Your name and MAU ID -->
+**Name: Serafym Bludov, as7197@student.mau.se** <!-- Your name and MAU ID -->
 
 <!-- One or two sentences: what kind of instrument is it, and what is it like to play? -->
+**Introduction: the instrument is a pumpkin that is interactive and produces sounds as you interact with it. Just enter something and see what it does.**
 
 ## How to play
 
@@ -12,9 +13,15 @@
 
 | When you...  | The sound...                         | The shapes... |
 | ------------ | ------------------------------------ | ------------- |
-| Click or tap | Plays a C4 (the example: replace it) | Nothing yet   |
-|              |                                      |               |
+| Enter        | Plays a determined note              | Any mouth part (pumpkin)|
+| Enter        | Plays a determined note              | Nose shapes (pumpkin)|
+| Enter        | Plays a note, after 5 times entering the circle, octave increases with one until 6 and then sets the octave back to 3, if you leave the pink circle 11 times pumpkin's eyes become red. | The pink circle|
+|  Enter       | play a random note with a random octave that is calculated inside the red square, but before that you have to enter and leave the red square.                                 | Pumpkin's eyes|
+| Enter and leave | fixes the time you entered and left the red square, based on the gap (the actual time you have been in the square) it gives you an octave, if you have been longer than 1 second in the square the octave automatically sets to 9, the avaliable octaves are from 0 to 9                                       | The red square|
+| Click/pointer Down| Plays a random note using another synth and builds a hatt (you will have to click multiple times). The shape itself is initially blue but changes its colour to black after clicking.                            | Blue square   |
+|    Enter     | Plays a random note, 3 different synth are used, is avaliable only after the hatt is built |The hatt parts|
 
+**Other: you do not need to memorize what shape does what. I would recommend to just play with the pumpkin and explore what it does. Honestly, you might need to read properly the mechanics of the red square, other parts and shapes could be discovered and understood without any explanations. One more thing, some times you might need to repeat your action to discover something (in case you have not read the instructions first).**
 <!-- Anything else a player needs to know: how to get started, a good thing to try first. -->
 
 ---

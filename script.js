@@ -47,6 +47,7 @@ let enteredCircle = [];
 let leftCircle = [];
 let counter2 = 0;
 let octave1 = 4;
+let justOctave = 4;
 let counter = Math.floor(Math.random () * 8) + 1;
 
 let octave2 = 4;
@@ -479,11 +480,11 @@ function play12(event) {
   synth.triggerAttackRelease("A4", "20n", Tone.now());
 }
 
-function pointerClick(event) { //Plays a random note for the square that builds the hatt. 
+function pointerClick(event) { //Plays a random note for the square that builds the hatt.
 
   counter = Math.floor(Math.random () * 8) + 1;
-  console.log(randomNote[counter] + octave1, duration[counter]);
-  favoritSynth.triggerAttackRelease(randomNote[counter] + octave1, duration[counter]);
+  console.log(randomNote[counter] + justOctave, duration[counter]);
+  favoritSynth.triggerAttackRelease(randomNote[counter] + justOctave, duration[counter]);
 
    /*shape.setColour(randomColor1, randomColor2, randomColor3);
    randomColor1 = Math.floor(Math.random () * 400) + 1;
