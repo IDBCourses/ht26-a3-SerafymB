@@ -40,9 +40,6 @@ const newNotes = ["D3", "C#4", "D#4", "A#4",
 // ---------- State ----------
 // State variables are the parts of your program that change over time.
 // For example: where the pointer is, how fast it's moving, or whether a drone is on.
-let randomColor1 = Math.floor(Math.random () * 400) + 1;
-let randomColor2 = Math.floor(Math.random () * 250) + 1;
-let randomColor3 = Math.floor(Math.random () * 70) + 1;
 let enteredCircle = [];
 let leftCircle = [];
 let counter2 = 0;
@@ -246,6 +243,13 @@ const jump17 = createShape()
 jump17.setColour(245, 400, 20);
 jump17.setPosition(0.38, 0.51);
 
+      // The red square that calculates the octave
+const octaveee = createShape()
+octaveee.setSize(130);
+octaveee.setRoundedness(0.2);
+octaveee.setColour(360, 200, 60);
+octaveee.setRotation(250);
+octaveee.setPosition(0.2, 0.1);
 
 //These arrays have to be placed after all the shapes because  // otherwise a few functions do not work.
 let arrayOfJumpShapes = [jump, jump2, jump3, jump4,
@@ -281,14 +285,6 @@ for (let i = 0; i < arrayOfJumpShapes.length; i++) {
  }
       }
 
-      // The red square that calculates the octave
-const octaveee = createShape()
-octaveee.setSize(130);
-octaveee.setRoundedness(0.2);
-octaveee.setColour(360, 200, 60);
-octaveee.setRotation(250);
-octaveee.setPosition(0.2, 0.1);
-
 // ---------- Sound ----------
 // Make the instruments and plug them into the speakers.
 const synth = new Tone.PolySynth(Tone.Syth).toDestination(); // can play several notes at once
@@ -301,7 +297,7 @@ function update() {
   setTimeout(update, 100); // call update() again in 100 milliseconds
 }
 
-function chase(event) {
+function chase(event) { // Makes 17 shapes chase the pointer and alters their position so that they stand as an oval.
   let normalX = event.clientX / window.innerWidth;
   let normalY = event.clientY /window.innerHeight;
   latestX = normalX;
@@ -485,11 +481,6 @@ function pointerClick(event) { //Plays a random note for the square that builds 
   counter = Math.floor(Math.random () * 8) + 1;
   console.log(randomNote[counter] + justOctave, duration[counter]);
   favoritSynth.triggerAttackRelease(randomNote[counter] + justOctave, duration[counter]);
-
-   /*shape.setColour(randomColor1, randomColor2, randomColor3);
-   randomColor1 = Math.floor(Math.random () * 400) + 1;
-   randomColor2 = Math.floor(Math.random () * 200) + 1;
-   randomColor3 = Math.floor(Math.random () * 70) + 1;*/
   }
 
   function showTheHat(event) { //Shows the hatt based on how many times you clicked and
@@ -655,58 +646,7 @@ function pointerClick(event) { //Plays a random note for the square that builds 
    }
   }
 
-  //function playy(event) {
-   // synth.triggerAttackRelease("E3", "20n", Tone.now());
-   // synth.triggerAttackRelease("B4", "20n", Tone.now() + 0.3);
-   // synth.triggerAttackRelease("E3", "20n", Tone.now() + 0.6);
-   // synth.triggerAttackRelease("B4", "20n", Tone.now() + 0.9);
-
-   // synth.triggerAttackRelease("E2", "20n", Tone.now() + 1.2);
-    //synth.triggerAttackRelease("E3", "20n", Tone.now() + 1.5);
-  //  synth.triggerAttackRelease("C4", "20n", Tone.now() + 1.8);
-
-    //synth.triggerAttackRelease("C5", "20n", Tone.now() + 2.1);
-    //synth.triggerAttackRelease("B4", "20n", Tone.now() + 2.4);
-    //synth.triggerAttackRelease("E2", "20n", Tone.now() + 2.7);
-   // synth.triggerAttackRelease("E3", "20n", Tone.now() + 3.0);
-   // synth.triggerAttackRelease("A4", "20n", Tone.now() + 3.3);
-
-   // synth.triggerAttackRelease("B2", "20n", Tone.now() + 3.6);
-   // synth.triggerAttackRelease("G3", "20n", Tone.now() + 3.9);
-   // synth.triggerAttackRelease("G2", "20n", Tone.now() + 4.2);
-  //  synth.triggerAttackRelease("E2", "20n", Tone.now() + 4.5);
-   // synth.triggerAttackRelease("E3", "20n", Tone.now() + 4.8);
-   // synth.triggerAttackRelease("E4", "20n", Tone.now() + 5.1);
-   // synth.triggerAttackRelease("F4", "20n", Tone.now() + 5.4);
-
-  //shape.setPosition(position1Shape, position2Shape)
- // position1Shape = position1Shape + 0.1;
- // position2Shape = position2Shape + 0.1;
- // console.log("The settings for the color for the circle are ", randomColor1, randomColor2, randomColor3);
-
-//if (position1Shape > 0.9) {
-  //  position1Shape = 0.2
-  //  console.log("The positions on x and y for the shape are: ", position1Shape, position2Shape)
- // } else if (position2Shape > 0.9) {
- //   position2Shape = 0.3
- //   console.log("The positions on x and y for the shape are: ", position1Shape, position2Shape)
-//  }
-//}
-
-//function randomNoteMono(event) {
-//  counter = Math.floor(Math.random () * 8) + 1;
-//  console.log(randomNote[counter], duration[counter]);
- // mono.triggerAttackRelease(randomNote[counter], duration[counter]);
-//}
-
-//function randomNoteSynth(event) {
-//  counter = Math.floor(Math.random () * 8) + 1;
-//  console.log(randomNote[counter], duration[counter]);
-//  synth.triggerAttackRelease(randomNote[counter], duration[counter]);
-//}
-
-//A few functions that make the noseParts play
-function playANoteNose(event) {
+function playANoteNose(event) { //A few functions that make the noseParts play
    synth.triggerAttackRelease("E4", "8n");
 }
 
@@ -755,7 +695,7 @@ function setup() {
   update(); // start the update loop
   use(); // start the use loop
 
-  // Example: a shape near the middle of the window. Replace it with your own.
+  // The oval
   const example = createShape("example");
   example.setPosition(0.1, 0.7);
   example.setSize(40, 200)
@@ -782,11 +722,13 @@ function setup() {
     window.addEventListener("pointermove", chase);
     window.addEventListener("pointermove", rotate);
 
+    // determines the octave for eyes
     octaveee.element.addEventListener("pointerenter", changeOctaveEnter);
     octaveee.element.addEventListener("pointerleave", changeOctaveLeave);
     octaveee.element.addEventListener("pointerleave", calculateOctave);
 
-   // window.addEventListener("pointerdown", sortTheParts);
+   // The order of the shapes is correct, when I started creating the mouth I started in the middle and went right then left, the sounds
+   // Are actually a short melody for Halloween and should be played from the left to the right.
   mouthPart13.element.addEventListener("pointerenter", play1)
   mouthPart12.element.addEventListener("pointerenter", play2)
   mouthPart11.element.addEventListener("pointerenter", play3)
