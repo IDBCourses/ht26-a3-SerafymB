@@ -487,6 +487,7 @@ function pointerClick(event) { //Plays a random note for the square that builds 
                               // also makes it interactive through adding addEventListeners
 
     for (let index = 0; index < partsOfTheHat.length; index++) {
+      console.log(partsOfTheHat[index]);
         partsOfTheHat[index].setSize(60);
         partsOfTheHat[index].setRoundedness(0.2);
         partsOfTheHat[index].setColour(360, 200, 0);
