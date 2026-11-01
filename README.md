@@ -21,7 +21,7 @@
 | Click/pointer Down| Plays a random note using another synth and builds a hatt (you will have to click multiple times). The shape itself is initially blue but changes its colour to black after clicking.                            | Blue square   |
 |    Enter     | Plays a random note, 3 different synth are used, is avaliable only after the hatt is built |The hatt parts|
 
-**Other: you do not need to memorize what shape does what. I would recommend to just play with the pumpkin and explore what it does. Honestly, you might need to read properly the mechanics of the red square, other parts and shapes could be discovered and understood without any explanations. One more thing, some times you might need to repeat your action to discover something (in case you have not read the instructions first).**
+**Other: you do not need to memorize what shape does what. I would recommend to play with the pumpkin and explore what it does. Honestly, you might need to read properly the mechanics of the red square, other parts and shapes could be discovered and understood without any additional explanations. One more thing, some times you might need to repeat your action to discover something (in case you have not read the instructions first).**
 <!-- Anything else a player needs to know: how to get started, a good thing to try first. -->
 
 ---
